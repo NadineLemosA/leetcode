@@ -2,34 +2,42 @@ package leetCode;
 
 public class BestTimeToBuyAndSellStock {
 	public static void main(String[] args) {
-		System.out.println(maxProfit(new int[] { 3, 3, 5, 0, 0, 3, 1, 4 })); // 4
+		System.out.println(maxProfit(new int[] { 7, 1, 5, 3, 6, 4 })); // 5
 	}
 
 	public static int maxProfit(int[] prices) {
-		int higherProfit = 0;
-		int maiorValor = 0;
-		int indiceMaiorValor = 0;
-		int price;
+		int maiorLucro = 0;
+		int proximoMaiorValor = 0;
+		int[] dadosMaiorValor;
+		int indiceProximoMaiorValor = 0;
 
-		for (int i = 1; i < prices.length; i++) {
-			int precoVenda = prices[i];
-			if (precoVenda >= maiorValor) {
-				maiorValor = precoVenda;
-				indiceMaiorValor = i;
+		for (int i = 0; i < prices.length; i++) {
+			if (i == indiceProximoMaiorValor) {
+				dadosMaiorValor = obtemDadosMaiorValor(prices, i);
+				indiceProximoMaiorValor = dadosMaiorValor[0];
+				proximoMaiorValor = dadosMaiorValor[1];
 			}
-		}
-		System.out.println(indiceMaiorValor);
 
-		for (int j = 0; j < indiceMaiorValor; j++) {
-			int precoAtual = prices[j];
-			if (precoAtual < prices[j + 1]) {
-				price = maiorValor - precoAtual;
-				if (price > higherProfit) {
-					higherProfit = price;
-				}
+			int resultadoCalculo = proximoMaiorValor - prices[i];
+
+			if (resultadoCalculo > maiorLucro) {
+				maiorLucro = resultadoCalculo;
 			}
 		}
 
-		return higherProfit;
+		return maiorLucro;
+	}
+
+	static int[] obtemDadosMaiorValor(int[] prices, int indiceAtualMaiorValor) {
+		int[] dadosMaiorValor = new int[2];
+
+		for (int i = indiceAtualMaiorValor + 1; i < prices.length; i++) {
+			if (prices[i] > dadosMaiorValor[1]) {
+				dadosMaiorValor[0] = i;
+				dadosMaiorValor[1] = prices[i];
+			}
+		}
+
+		return dadosMaiorValor;
 	}
 }
