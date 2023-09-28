@@ -4,38 +4,44 @@ import java.util.ArrayList;
 
 public class FindTheIndexOfTheFirstOccurrenceInAString {
     public static void main(String[] args) {
-        System.out.println(strStr("leetcode", "leeto"));
+        System.out.println(strStr("mississippi", "pi"));
+        // System.out.println(strStr("mississippi", "issip"));
     }
 
     public static int strStr(String haystack, String needle) {
         char[] charactersHaystack = haystack.toCharArray();
         char[] charactersNeedle = needle.toCharArray();
-
         String combination = "";
-        int indice = -1;
         ArrayList<Integer> indexList = new ArrayList<>();
+        int indice = -1;
+        int i = 0;
+        int j = 0;
 
-        for (int i = 0; i < charactersHaystack.length; i++) { // excedendo o limite
-            for (int j = 0; j < charactersNeedle.length; j++) {
-                System.out.println("i: " + i);
-                System.out.println("j: " + j);
-                if (charactersHaystack[i] == charactersNeedle[j]) {
-                    combination = combination + String.valueOf(charactersNeedle[j]);
-                    indexList.add(i);
-                    System.out.println("combinação: " + combination);
-                    i++;
-                } else {
-                    combination = "";
+        for (i = 0; i < charactersHaystack.length; i++) {
+
+            if (charactersNeedle[j] == charactersHaystack[i]) {
+                combination = combination + String.valueOf(charactersNeedle[j]);
+                indexList.add(i);
+
+                if (j < charactersNeedle.length - 1) {
+                    j++;
                 }
+            } else {
+
+                if (!indexList.isEmpty()) {
+                    i = indexList.get(0);
+                }
+
+                combination = "";
+                indexList.clear();
+                j = 0;
+            }
+
+            if (needle.equals(combination)) {
+                indice = indexList.get(0);
+                i = charactersHaystack.length;
             }
         }
-
-        if (needle.equals(combination)) {
-            indice = indexList.get(0);
-        }
-
-        System.out.println("indice:" + indice);
-        System.out.println(indexList);
 
         return indice;
     }
