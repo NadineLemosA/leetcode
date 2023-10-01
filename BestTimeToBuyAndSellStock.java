@@ -6,38 +6,38 @@ public class BestTimeToBuyAndSellStock {
 	}
 
 	public static int maxProfit(int[] prices) {
-		int maiorLucro = 0;
-		int proximoMaiorValor = 0;
-		int[] dadosMaiorValor;
-		int indiceProximoMaiorValor = 0;
+		int greaterProfit = 0;
+		int nextHighestValue = 0;
+		int[] highestValueData;
+		int indexOfTheNextHighestValue = 0;
 
 		for (int i = 0; i < prices.length; i++) {
-			if (i == indiceProximoMaiorValor) {
-				dadosMaiorValor = obtemDadosMaiorValor(prices, i);
-				indiceProximoMaiorValor = dadosMaiorValor[0];
-				proximoMaiorValor = dadosMaiorValor[1];
+			if (i == indexOfTheNextHighestValue) {
+				highestValueData = getDataFromTheHighestValueFound(prices, i);
+				indexOfTheNextHighestValue = highestValueData[0];
+				nextHighestValue = highestValueData[1];
 			}
 
-			int resultadoCalculo = proximoMaiorValor - prices[i];
+			int profitResult = nextHighestValue - prices[i];
 
-			if (resultadoCalculo > maiorLucro) {
-				maiorLucro = resultadoCalculo;
+			if (profitResult > greaterProfit) {
+				greaterProfit = profitResult;
 			}
 		}
 
-		return maiorLucro;
+		return greaterProfit;
 	}
 
-	static int[] obtemDadosMaiorValor(int[] prices, int indiceAtualMaiorValor) {
-		int[] dadosMaiorValor = new int[2];
+	static int[] getDataFromTheHighestValueFound(int[] prices, int indexCurrentHighestValue) {
+		int[] highestValueData = new int[2];
 
-		for (int i = indiceAtualMaiorValor + 1; i < prices.length; i++) {
-			if (prices[i] > dadosMaiorValor[1]) {
-				dadosMaiorValor[0] = i;
-				dadosMaiorValor[1] = prices[i];
+		for (int i = indexCurrentHighestValue + 1; i < prices.length; i++) {
+			if (prices[i] > highestValueData[1]) {
+				highestValueData[0] = i;
+				highestValueData[1] = prices[i];
 			}
 		}
 
-		return dadosMaiorValor;
+		return highestValueData;
 	}
 }
