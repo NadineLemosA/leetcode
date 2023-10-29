@@ -2,7 +2,7 @@ package leetCode;
 
 import java.util.Arrays;
 
-public class RemoveDuplicatesFromSortedList {
+public class MergeSortedArray {
     public static void main(String[] args) {
         int[] a = new int[] { 4, 2, 3, 0, 0, 0 }; // criados externamente, para ser vinculado e executar a função com os
                                                   // valores externos
