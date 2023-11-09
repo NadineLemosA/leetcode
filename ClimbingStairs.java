@@ -1,8 +1,7 @@
 package leetCode;
 
 public class ClimbingStairs {
-//     Você está subindo uma escada. São necessários n passos para chegar ao topo.
-// Você pode subir de 1 ou 2 degraus por vez. De quantas maneiras distintas você pode chegar ao topo?
+
     public static void main(String[] args) {
         System.out.println(climbStairs(1));
         System.out.println(climbStairs(2));
