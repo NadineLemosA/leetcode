@@ -14,7 +14,7 @@ public class PascalsTriangle {
     public static List<List<Integer>> generate(int numRows) {
         List<List<Integer>> listOfLists = new ArrayList<>();
         List<Integer> numbersFirstLineTriangle = Arrays.asList(1);
-        List<Integer> numbersSecondLineTriangle = Arrays.asList(1,1);
+        List<Integer> numbersSecondLineTriangle = Arrays.asList(1, 1);
         int secondLineSize = numbersSecondLineTriangle.size() - 1;
 
         if (numRows == 1) {
@@ -23,29 +23,32 @@ public class PascalsTriangle {
         }
 
         if (numRows == 2) {
-            listOfLists.add(numbersFirstLineTriangle);
-            listOfLists.add(numbersSecondLineTriangle);
+            addsFirstTwoLinesToList(listOfLists, numbersFirstLineTriangle, numbersSecondLineTriangle);
             return listOfLists;
         }
 
-        listOfLists.add(numbersFirstLineTriangle);
-        listOfLists.add(numbersSecondLineTriangle);
+        addsFirstTwoLinesToList(listOfLists, numbersFirstLineTriangle, numbersSecondLineTriangle);
 
-        while (listOfLists.size() != numRows) {
-            List<Integer> arrayOrigem = new ArrayList<>();
-            arrayOrigem.add(1);
-            arrayOrigem.add(1);
+         while (listOfLists.size() != numRows) {
+            List<Integer> arrayOfSums = new ArrayList<>();
+            arrayOfSums.add(1);
+            arrayOfSums.add(1);
 
             for (int i = 0; i < secondLineSize; i++) {
-                Integer addedNumbers = numbersSecondLineTriangle.get(i) + numbersSecondLineTriangle.get(i + 1);
-                arrayOrigem.add(1, addedNumbers);
+                arrayOfSums.add(1, numbersSecondLineTriangle.get(i) + numbersSecondLineTriangle.get(i + 1));
             }
 
-            secondLineSize = arrayOrigem.size() - 1;
-            listOfLists.add(arrayOrigem);
-            numbersSecondLineTriangle = new ArrayList<>(arrayOrigem);
+            secondLineSize = arrayOfSums.size() - 1;
+            listOfLists.add(arrayOfSums);
+            numbersSecondLineTriangle = new ArrayList<>(arrayOfSums);
         }
 
         return listOfLists;
+    }
+
+    public static void addsFirstTwoLinesToList(List<List<Integer>> listOfLists,
+            List<Integer> numbersFirstLineTriangle, List<Integer> numbersSecondLineTriangle) {
+        listOfLists.add(numbersFirstLineTriangle);
+        listOfLists.add(numbersSecondLineTriangle);
     }
 }
