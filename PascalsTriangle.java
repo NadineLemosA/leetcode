@@ -22,21 +22,18 @@ public class PascalsTriangle {
             return listOfLists;
         }
 
-        if (numRows == 2) {
-            addsFirstTwoLinesToList(listOfLists, numbersFirstLineTriangle, numbersSecondLineTriangle);
-            return listOfLists;
-        }
+        if (numRows == 2)
+            return addsFirstTwoLinesToList(numbersFirstLineTriangle, numbersSecondLineTriangle);
 
-        addsFirstTwoLinesToList(listOfLists, numbersFirstLineTriangle, numbersSecondLineTriangle);
+        listOfLists = addsFirstTwoLinesToList(numbersFirstLineTriangle, numbersSecondLineTriangle);
 
-         while (listOfLists.size() != numRows) {
+        while (listOfLists.size() != numRows) {
             List<Integer> arrayOfSums = new ArrayList<>();
             arrayOfSums.add(1);
             arrayOfSums.add(1);
 
-            for (int i = 0; i < secondLineSize; i++) {
+            for (int i = 0; i < secondLineSize; i++)
                 arrayOfSums.add(1, numbersSecondLineTriangle.get(i) + numbersSecondLineTriangle.get(i + 1));
-            }
 
             secondLineSize = arrayOfSums.size() - 1;
             listOfLists.add(arrayOfSums);
@@ -46,9 +43,13 @@ public class PascalsTriangle {
         return listOfLists;
     }
 
-    public static void addsFirstTwoLinesToList(List<List<Integer>> listOfLists,
-            List<Integer> numbersFirstLineTriangle, List<Integer> numbersSecondLineTriangle) {
-        listOfLists.add(numbersFirstLineTriangle);
-        listOfLists.add(numbersSecondLineTriangle);
+    public static List<List<Integer>> addsFirstTwoLinesToList(
+            List<Integer> numbersFirstLineTriangle,
+            List<Integer> numbersSecondLineTriangle) {
+        List<List<Integer>> result = new ArrayList<>();
+        result.add(numbersFirstLineTriangle);
+        result.add(numbersSecondLineTriangle);
+
+        return result;
     }
 }
