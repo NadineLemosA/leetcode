@@ -2,39 +2,138 @@ package leetCode.MergeTwoSortedLists;
 
 public class MergeTwoSortedLists {
     public static void main(String[] args) {
-        ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(4)));
-        ListNode list2 = new ListNode(1, new ListNode(3, new ListNode(4)));
+        ListNode list1 = new ListNode(1);
+        ListNode list2 = new ListNode(1, new ListNode(3, new ListNode(5)));
         System.out.println(mergeTwoLists(list1, list2));
     }
+    // como subir pasta inteira para o git?
+    // fazer funções
 
     public static ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        ListNode mergedList = null;
-        ListNode temporarioProx = new ListNode(list1.val, list1.next);
+        ListNode mergedLists = null;
+        ListNode temporario = null;
 
-        while (temporarioProx != null) {
-            if (mergedList == null) {
-                mergedList = new ListNode(temporarioProx.val);
-                temporarioProx = temporarioProx.next;
-            } else {
-                mergedList.val = temporarioProx.val;
-                temporarioProx = temporarioProx.next;
-            }
-            System.out.println(mergedList.val);
+        if (list1 == null && list2 == null) {
+            return null;
         }
 
-        temporarioProx = new ListNode(list2.val, list2.next);
-
-        while (temporarioProx != null) {
-            if (mergedList == null) {
-                mergedList = new ListNode(temporarioProx.val);
-                temporarioProx = temporarioProx.next;
-            } else {
-                mergedList.val = temporarioProx.val;
-                temporarioProx = temporarioProx.next;
-            }
-            System.out.println(mergedList.val);
+        if (list1 == null) {F
+            return list2;
         }
 
-        return mergedList;
+        if (list2 == null) {
+
+            return list1;
+        }
+
+        while (list1 != null || list2 != null) {
+
+            if (list1 == null) {
+                if (mergedLists.next == null) {
+                    mergedLists.next = list2;
+                } else {
+                    temporario = mergedLists.next;
+                    boolean executaLaco = true;
+
+                    while (executaLaco) {
+                        if (temporario.next == null) {
+                            temporario.next = list2;
+                            executaLaco = false;
+                        }
+
+                        temporario = temporario.next;
+                    }
+                }
+
+                return mergedLists;
+            }
+
+            if (list2 == null) {
+                if (mergedLists.next == null) {
+                    mergedLists.next = list1;
+                } else {
+                    temporario = mergedLists.next;
+                    boolean executaLaco = true;
+
+                    while (executaLaco) {
+                        if (temporario.next == null) {
+                            temporario.next = list1;
+                            executaLaco = false;
+                        }
+
+                        temporario = temporario.next;
+                    }
+                }
+
+                return mergedLists;
+            }
+
+            if (list1.val <= list2.val) {
+
+                if (mergedLists == null) {
+
+                    if (list1.val == list2.val) {
+                        mergedLists = new ListNode(list1.val);
+                        mergedLists.next = new ListNode(list2.val);
+                        list2 = list2.next;
+                    } else {
+                        mergedLists = new ListNode(list1.val);
+                    }
+                } else {
+
+                    if (mergedLists.next == null) {
+                        mergedLists.next = new ListNode(list1.val);
+                    } else {
+                        temporario = mergedLists.next;
+                        boolean executaLaco = true;
+
+                        while (executaLaco) {
+                            if (temporario.next == null) {
+                                temporario.next = new ListNode(list1.val);
+                                executaLaco = false;
+                            }
+
+                            temporario = temporario.next;
+                        }
+                    }
+                }
+
+                list1 = list1.next;
+
+            } else {
+
+                if (mergedLists == null) {
+
+                    if (list1.val == list2.val) {
+                        mergedLists = new ListNode(list1.val);
+                        mergedLists.next = new ListNode(list2.val);
+                        list2 = list2.next;
+                    } else {
+                        mergedLists = new ListNode(list2.val);
+                    }
+                } else {
+
+                    if (mergedLists.next == null) {
+                        mergedLists.next = new ListNode(list2.val);
+                    } else {
+                        temporario = mergedLists.next;
+                        boolean executaLaco = true;
+
+                        while (executaLaco) {
+                            if (temporario.next == null) {
+                                temporario.next = new ListNode(list2.val);
+                                executaLaco = false;
+                            }
+
+                            temporario = temporario.next;
+                        }
+                    }
+                }
+
+                list2 = list2.next;
+            }
+        }
+
+        return mergedLists;
     }
 }
