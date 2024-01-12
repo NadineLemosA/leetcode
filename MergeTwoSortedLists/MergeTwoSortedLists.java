@@ -6,8 +6,6 @@ public class MergeTwoSortedLists {
         ListNode list2 = new ListNode(1, new ListNode(3, new ListNode(5)));
         System.out.println(mergeTwoLists(list1, list2));
     }
-    // como subir pasta inteira para o git?
-    // fazer funções
 
     public static ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         ListNode mergedLists = null;
@@ -17,7 +15,7 @@ public class MergeTwoSortedLists {
             return null;
         }
 
-        if (list1 == null) {F
+        if (list1 == null) {
             return list2;
         }
 
